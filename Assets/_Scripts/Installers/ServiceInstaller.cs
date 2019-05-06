@@ -9,9 +9,8 @@ namespace _Scripts.Installers
         public override void InstallBindings()
         {
             Container.Bind<IScheduler>().FromInstance(Scheduler.DefaultSchedulers.TimeBasedOperations);
-
-            Container.BindInterfacesTo<TickService>().AsSingle();
-            Container.BindInterfacesTo<OrderService>().AsSingle();
+            
+            Container.BindInterfacesTo<ActionTimerService>().AsSingle();
         }
     }
 }
