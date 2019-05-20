@@ -1,9 +1,8 @@
-﻿using _Scripts.Unit;
+﻿using Zenject;
+using _Scripts.Unit;
 
 namespace _Scripts.Factories
 {
-    public interface ICombatUnitFactory
-    {
-        ICombatUnitModel CreateCombatUnit(IPreparationUnitModel preparationUnit);
-    }
+    public interface ICombatUnitFactory : IFactory<IPreparationUnitModel, UnitAlliance, ICombatUnitModel>
+    { }
 }

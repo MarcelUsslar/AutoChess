@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _Scripts.Board
+namespace _Scripts.Config
 {
     public interface IBoardConfig
     {

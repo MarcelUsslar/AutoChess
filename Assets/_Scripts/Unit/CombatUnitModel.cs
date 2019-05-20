@@ -6,7 +6,7 @@ namespace _Scripts.Unit
 {
     public class CombatUnitModel : ICombatUnitModel
     {
-        public class Factory : PlaceholderFactory<int, UnitAlliance, IUnitMovementStrategy, IUnitHealthStrategy, CombatUnitModel>
+        public class Factory : PlaceholderFactory<int, UnitAlliance, CombatUnitModel>
         { }
 
         private readonly IUnitMovementStrategy _movementStrategy;

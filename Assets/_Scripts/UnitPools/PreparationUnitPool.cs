@@ -3,21 +3,21 @@ using _Scripts.Unit;
 
 namespace _Scripts.UnitPools
 {
-    public class ShopUnitPool : IUnitPool<IShopUnitModel>
+    public class PreparationUnitPool : IUnitPool<IPreparationUnitModel>
     {
-        private readonly IList<IShopUnitModel> _units = new List<IShopUnitModel>();
+        private readonly IList<IPreparationUnitModel> _units = new List<IPreparationUnitModel>();
 
-        public IList<IShopUnitModel> Units
+        public IList<IPreparationUnitModel> Units
         {
             get { return _units; }
         }
 
-        public void AddUnit(IShopUnitModel unit)
+        public void AddUnit(IPreparationUnitModel unit)
         {
             _units.Add(unit);
         }
 
-        public void RemoveUnit(IShopUnitModel unit)
+        public void RemoveUnit(IPreparationUnitModel unit)
         {
             _units.Remove(unit);
         }

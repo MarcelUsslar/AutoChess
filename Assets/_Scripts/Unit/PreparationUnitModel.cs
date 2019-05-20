@@ -1,7 +1,7 @@
 ﻿using UniRx;
 using UnityEngine;
 using Zenject;
-using _Scripts.Board;
+using _Scripts.UnitPools;
 using _Scripts.Utility;
 
 namespace _Scripts.Unit
@@ -11,7 +11,8 @@ namespace _Scripts.Unit
         public class Factory : PlaceholderFactory<int, PreparationUnitModel>
         { }
 
-        private readonly IBoardConfig _config;
+        private readonly IUnitPool<IPreparationUnitModel> _boardPool;
+        private readonly IUnitPool<IPreparationUnitModel> _benchPool;
 
         public int Id { get; private set; }
         private readonly IReactiveProperty<Vector2Int> _position;
@@ -22,13 +23,33 @@ namespace _Scripts.Unit
         {
             get { return _position; }
         }
-        
-        public PreparationUnitModel(int id, IBoardConfig config, IDisposer disposer)
+
+        public PreparationUnitModel(int id,
+            [Inject(Id = true)] IUnitPool<IPreparationUnitModel> boardPool,
+            [Inject(Id = true)] IUnitPool<IPreparationUnitModel> benchPool,
+            IDisposer disposer)
         {
             Id = id;
-            _config = config;
+            _boardPool = boardPool;
+            _benchPool = benchPool;
             _position = new ReactiveProperty<Vector2Int>();
             IsPlacedOnBoard = _position.Select(IsOnBoard).ToReadOnlyReactiveProperty().AddTo(disposer);
+
+            IsPlacedOnBoard.Subscribe(MoveToPool).AddTo(disposer);
+        }
+
+        public void MoveToPool(bool onBoard)
+        {
+            if (onBoard)
+            {
+                _benchPool.RemoveUnit(this);
+                _boardPool.AddUnit(this);
+            }
+            else
+            {
+                _benchPool.AddUnit(this);
+                _boardPool.RemoveUnit(this);
+            }
         }
 
         public void SetPosition(Vector2Int position)
@@ -36,9 +57,9 @@ namespace _Scripts.Unit
             _position.Value = position;
         }
 
-        private bool IsOnBoard(Vector2Int currentPosition)
+        private static bool IsOnBoard(Vector2Int currentPosition)
         {
-            return currentPosition.x < _config.BoardSize.x;
+            return currentPosition.x < 0;
         }
     }
 }

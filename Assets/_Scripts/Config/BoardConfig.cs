@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
-namespace _Scripts.Board
+namespace _Scripts.Config
 {
+    [CreateAssetMenu(fileName = "BoardConfig", menuName = "Configs/Board Config")]
     public class BoardConfig : ScriptableObject, IBoardConfig
     {
         [SerializeField] private Vector2Int _boardSize;

@@ -8,7 +8,7 @@ namespace _Scripts.Installers
     {
         public override void InstallBindings()
         {
-            Container.BindFactory<int, UnitAlliance, IUnitMovementStrategy, IUnitHealthStrategy, CombatUnitModel, CombatUnitModel.Factory>();
+            Container.BindFactory<int, UnitAlliance, CombatUnitModel, CombatUnitModel.Factory>();
 
             Container.BindInterfacesTo<CombatBoardUnitPool>().AsSingle();
         }

@@ -4,9 +4,16 @@ namespace _Scripts.Factories
 {
     public class CombatUnitFactory : ICombatUnitFactory
     {
-        public ICombatUnitModel CreateCombatUnit(IPreparationUnitModel preparationUnit)
+        private readonly CombatUnitModel.Factory _factory;
+
+        public CombatUnitFactory(CombatUnitModel.Factory factory)
         {
-            throw new System.NotImplementedException();
+            _factory = factory;
+        }
+
+        public ICombatUnitModel Create(IPreparationUnitModel preparationUnit, UnitAlliance alliance)
+        {
+            return _factory.Create(preparationUnit.Id, alliance);
         }
     }
 }

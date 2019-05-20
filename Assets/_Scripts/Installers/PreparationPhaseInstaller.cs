@@ -12,8 +12,8 @@ namespace _Scripts.Installers
             Container.BindFactory<int, int, ShopUnitModel, ShopUnitModel.Factory>();
 
             Container.BindInterfacesTo<ShopUnitPool>().AsSingle();
-            Container.BindInterfacesTo<PreparationBoardUnitPool>().AsSingle().WithConcreteId(true);
-            Container.BindInterfacesTo<PreparationBenchUnitPool>().AsSingle().WithConcreteId(false);
+            Container.BindInterfacesTo<PreparationUnitPool>().AsSingle().WithConcreteId(true);
+            Container.BindInterfacesTo<PreparationUnitPool>().AsSingle().WithConcreteId(false);
         }
     }
 }

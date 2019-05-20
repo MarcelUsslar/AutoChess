@@ -1,9 +1,8 @@
-﻿using _Scripts.Unit;
+﻿using Zenject;
+using _Scripts.Unit;
 
 namespace _Scripts.Factories
 {
-    public interface IShopFactory
-    {
-        IShopUnitModel CreateShopUnit(int id);
-    }
+    public interface IShopFactory : IFactory<int, IShopUnitModel>
+    { }
 }

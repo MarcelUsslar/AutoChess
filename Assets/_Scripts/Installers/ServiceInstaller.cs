@@ -1,6 +1,7 @@
 using UniRx;
 using Zenject;
 using _Scripts.Services;
+using _Scripts.Unit;
 
 namespace _Scripts.Installers
 {
@@ -11,6 +12,10 @@ namespace _Scripts.Installers
             Container.Bind<IScheduler>().FromInstance(Scheduler.DefaultSchedulers.TimeBasedOperations);
             
             Container.BindInterfacesTo<ActionTimerService>().AsSingle();
+            Container.BindInterfacesTo<RandomUnitGenerator>().AsSingle();
+
+            Container.BindInterfacesTo<GenericUnitMovementStrategy>().AsTransient();
+            Container.BindInterfacesTo<GenericUnitHealthStrategy>().AsTransient();
         }
     }
 }

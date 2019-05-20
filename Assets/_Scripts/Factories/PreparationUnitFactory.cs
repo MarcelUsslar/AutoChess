@@ -4,9 +4,16 @@ namespace _Scripts.Factories
 {
     public class PreparationUnitFactory : IPreparationUnitFactory
     {
-        public IPreparationUnitModel CreatePreparationUnit(IShopUnitModel shopUnit)
+        private readonly PreparationUnitModel.Factory _preparationUnitModelFactory;
+
+        public PreparationUnitFactory(PreparationUnitModel.Factory preparationUnitModelFactory)
         {
-            throw new System.NotImplementedException();
+            _preparationUnitModelFactory = preparationUnitModelFactory;
+        }
+
+        public IPreparationUnitModel Create(IShopUnitModel shopUnit)
+        {
+            return _preparationUnitModelFactory.Create(shopUnit.Id);
         }
     }
 }

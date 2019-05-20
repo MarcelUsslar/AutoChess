@@ -1,12 +1,22 @@
-﻿using _Scripts.Unit;
+﻿using _Scripts.Config;
+using _Scripts.Unit;
 
 namespace _Scripts.Factories
 {
     public class ShopFactory : IShopFactory
     {
-        public IShopUnitModel CreateShopUnit(int id)
+        private readonly IShopConfig _shopConfig;
+        private readonly ShopUnitModel.Factory _shopUnitModelFactory;
+
+        public ShopFactory(IShopConfig shopConfig, ShopUnitModel.Factory shopUnitModelFactory)
         {
-            throw new System.NotImplementedException();
+            _shopConfig = shopConfig;
+            _shopUnitModelFactory = shopUnitModelFactory;
+        }
+
+        public IShopUnitModel Create(int id)
+        {
+            return _shopUnitModelFactory.Create(id, _shopConfig.GetCost(id));
         }
     }
 }
