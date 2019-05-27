@@ -32,10 +32,11 @@ namespace _Scripts.Unit
             Id = id;
             _boardPool = boardPool;
             _benchPool = benchPool;
-            _position = new ReactiveProperty<Vector2Int>();
-            IsPlacedOnBoard = _position.Select(IsOnBoard).ToReadOnlyReactiveProperty().AddTo(disposer);
 
-            IsPlacedOnBoard.Subscribe(MoveToPool).AddTo(disposer);
+            _position = new ReactiveProperty<Vector2Int>();
+            IsPlacedOnBoard = _position.Select(IsOnBoard).ToReadOnlyReactiveProperty().AddToDisposer(disposer);
+
+            IsPlacedOnBoard.Subscribe(MoveToPool).AddToDisposer(disposer);
         }
 
         public void MoveToPool(bool onBoard)

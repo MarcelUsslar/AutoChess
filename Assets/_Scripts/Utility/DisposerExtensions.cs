@@ -22,7 +22,7 @@ namespace _Scripts.Utility
 
     public static class DisposerExtensions
     {
-        public static T AddTo<T>(this T disposable, IDisposer disposer) where T : IDisposable
+        public static T AddToDisposer<T>(this T disposable, IDisposer disposer) where T : IDisposable
         {
             disposer.Add(disposable);
             return disposable;

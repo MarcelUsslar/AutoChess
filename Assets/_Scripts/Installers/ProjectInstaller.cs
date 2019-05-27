@@ -15,6 +15,8 @@ namespace _Scripts.Installers
             ServiceInstaller.Install(Container);
             FactoryInstaller.Install(Container);
 
+            PlayerInstaller.Install(Container);
+
             PreparationPhaseInstaller.Install(Container);
             CombatPhaseInstaller.Install(Container);
 

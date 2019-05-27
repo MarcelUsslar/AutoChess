@@ -1,6 +1,7 @@
 using Zenject;
 using _Scripts.Unit;
 using _Scripts.UnitPools;
+using _Scripts.Utility;
 
 namespace _Scripts.Installers
 {
@@ -10,6 +11,7 @@ namespace _Scripts.Installers
         {
             Container.BindFactory<int, PreparationUnitModel, PreparationUnitModel.Factory>();
             Container.BindFactory<int, int, ShopUnitModel, ShopUnitModel.Factory>();
+            Container.BindFactory<IShopUnitModel, IShopUnitView, IDisposer, ShopUnitController, ShopUnitController.Factory>();
 
             Container.BindInterfacesTo<ShopUnitPool>().AsSingle();
             Container.BindInterfacesTo<PreparationUnitPool>().AsSingle().WithConcreteId(true);

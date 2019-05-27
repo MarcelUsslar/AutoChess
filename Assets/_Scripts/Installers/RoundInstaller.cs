@@ -1,3 +1,4 @@
+using System;
 using Zenject;
 using _Scripts.Config;
 using _Scripts.Factories;
@@ -12,23 +13,28 @@ namespace _Scripts.Installers
     {
         public override void InstallBindings()
         {
+            var disposer = Disposer.Create();
+            Container.Rebind<IDisposer>().FromInstance(disposer);
+            Container.Bind<IDisposable>().FromInstance(disposer);
+
             var shopPool = Container.ResolveId<IUnitPool<IShopUnitModel>>(true);
             shopPool.Clear();
 
             var shopConfig = Container.Resolve<IShopConfig>();
             var shopFactory = Container.Resolve<IShopFactory>();
             var randomUnitGenerator = Container.Resolve<IRandomUnitGenerator>();
-            
-            var preparationUnitFactory = Container.Resolve<IPreparationUnitFactory>();
-            AddShopUnits(shopConfig.ShopEntryAmount, shopPool, shopFactory, randomUnitGenerator, preparationUnitFactory);
+
+            var shopPanel = Container.Resolve<IShopPanelView>();
+            AddShopUnits(shopConfig.ShopEntryAmount, shopPanel, shopPool, shopFactory, randomUnitGenerator, disposer);
             
             // TODO create board controller and visuals
         }
 
-        private static void AddShopUnits(int amount, IUnitPool<IShopUnitModel> unitPool, IShopFactory shopFactory,
-            IRandomUnitGenerator unitGenerator, IPreparationUnitFactory preparationUnitFactory)
+        private static void AddShopUnits(int amount, IShopPanelView shopPanel,
+            IUnitPool<IShopUnitModel> unitPool, IShopFactory shopFactory,
+            IRandomUnitGenerator unitGenerator, IDisposer disposer)
         {
-            amount.Times(() => unitPool.AddUnit(shopFactory.Create(unitGenerator.GetRandomUnitId())));
+            amount.Times(() => unitPool.AddUnit(shopFactory.Create(unitGenerator.GetRandomUnitId(), shopPanel.UnitParent, disposer)));
             // create unit controller with preparation unit factory
         }
     }
