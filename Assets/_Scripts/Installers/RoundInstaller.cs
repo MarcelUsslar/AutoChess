@@ -17,7 +17,7 @@ namespace _Scripts.Installers
             Container.Rebind<IDisposer>().FromInstance(disposer);
             Container.Bind<IDisposable>().FromInstance(disposer);
 
-            var shopPool = Container.ResolveId<IUnitPool<IShopUnitModel>>(true);
+            var shopPool = Container.Resolve<IUnitPool<IShopUnitModel>>();
             shopPool.Clear();
 
             var shopConfig = Container.Resolve<IShopConfig>();

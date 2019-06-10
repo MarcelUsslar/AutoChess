@@ -26,7 +26,7 @@ namespace _Scripts.Unit
 
         public PreparationUnitModel(int id,
             [Inject(Id = true)] IUnitPool<IPreparationUnitModel> boardPool,
-            [Inject(Id = true)] IUnitPool<IPreparationUnitModel> benchPool,
+            [Inject(Id = false)] IUnitPool<IPreparationUnitModel> benchPool,
             IDisposer disposer)
         {
             Id = id;

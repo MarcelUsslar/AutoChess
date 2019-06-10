@@ -20,7 +20,7 @@ namespace _Scripts.Unit
         public IReadOnlyReactiveProperty<bool> CanBeBought { get; }
 
         public ShopUnitModel(int id, int cost, ICashModel cashModel,
-            IPreparationUnitPool preparationUnitPool,
+            [Inject(Id = false)] IPreparationUnitPool preparationUnitPool,
             IPreparationUnitFactory preparationUnitFactory,
             IDisposer disposer)
         {

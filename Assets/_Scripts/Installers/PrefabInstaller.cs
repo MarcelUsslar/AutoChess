@@ -15,7 +15,7 @@ namespace _Scripts.Installers
         public override void InstallBindings()
         {
             BindViewFactory(_shopUnitView);
-            BindSingletonView(_shopPanelView);
+            BindSingletonView(_shopPanelView, true);
         }
 
         #region ViewFactories
@@ -39,9 +39,8 @@ namespace _Scripts.Installers
         
         private void BindSingletonView<TView>(TView view, bool activeByDefault = false) where TView : MonoBehaviour
         {
-            var prefab = view as GameObject;
-            prefab.gameObject.SetActive(activeByDefault);
-            Container.BindInterfacesAndSelfTo<TView>().FromComponentInNewPrefab(prefab)
+            view.gameObject.SetActive(activeByDefault);
+            Container.BindInterfacesAndSelfTo<TView>().FromComponentInNewPrefab(view.gameObject)
                 .UnderTransformGroup("Singleton Views").AsSingle();
         }
 
