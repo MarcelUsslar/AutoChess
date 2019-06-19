@@ -7,7 +7,9 @@ namespace _Scripts.Unit
     {
         int Id { get; }
         IReadOnlyReactiveProperty<Vector2Int> Position { get; }
-        IReadOnlyReactiveProperty<bool> IsPlacedOnBoard { get; }
+
+        void MoveTo(bool isOnBoard);
+        void MoveTo(bool isOnBoard, Vector2Int position);
 
         void SetPosition(Vector2Int position);
     }

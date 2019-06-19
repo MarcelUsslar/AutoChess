@@ -20,6 +20,8 @@ namespace _Scripts.Installers
             PreparationPhaseInstaller.Install(Container);
             CombatPhaseInstaller.Install(Container);
 
+            ShopInstaller.Install(Container);
+
             RoundInstaller.Install(Container);
         }
     }

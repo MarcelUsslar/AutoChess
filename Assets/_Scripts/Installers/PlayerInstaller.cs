@@ -5,7 +5,7 @@ namespace _Scripts.Installers
 {
     public class PlayerInstaller : Installer<PlayerInstaller>
     {
-        private const int K_playerCash = 5;
+        private const int K_playerCash = int.MaxValue;
 
         public override void InstallBindings()
         {

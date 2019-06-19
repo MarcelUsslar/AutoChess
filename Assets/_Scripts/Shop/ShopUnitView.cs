@@ -12,6 +12,9 @@ namespace _Scripts.Unit
             set { _purchaseButton.interactable = value; }
         }
 
-        public Button BuyButton => _purchaseButton;
+        public Button BuyButton
+        {
+            get { return _purchaseButton; }
+        }
     }
 }

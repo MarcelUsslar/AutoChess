@@ -4,10 +4,11 @@ namespace _Scripts.Unit
 {
     public interface IShopUnitModel
     {
-        int Id { get; }
-        int Cost { get; }
+        IReadOnlyReactiveProperty<int> Id { get; }
+        IReadOnlyReactiveProperty<int> Cost { get; }
         IReadOnlyReactiveProperty<bool> CanBeBought { get; }
 
         void Buy();
+        void Reset(int unitId);
     }
 }

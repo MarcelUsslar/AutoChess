@@ -6,7 +6,7 @@ namespace _Scripts.Unit
 {
     public class ShopUnitController
     {
-        public class Factory : PlaceholderFactory<IShopUnitModel, IShopUnitView, IDisposer, ShopUnitController>
+        public class Factory : PlaceholderFactory<IShopUnitModel, IShopUnitView, ShopUnitController>
         { }
 
         private ShopUnitController(IShopUnitModel unitModel, IShopUnitView unitView, IDisposer disposer)

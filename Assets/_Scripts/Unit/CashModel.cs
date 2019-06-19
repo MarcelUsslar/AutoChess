@@ -6,7 +6,10 @@ namespace _Scripts.Unit
     {
         private readonly IReactiveProperty<int> _currentCash;
 
-        public IReadOnlyReactiveProperty<int> CurrentCash => _currentCash;
+        public IReadOnlyReactiveProperty<int> CurrentCash
+        {
+            get { return _currentCash; }
+        }
 
         public CashModel(int currentCash)
         {

@@ -5,25 +5,35 @@ using _Scripts.Unit;
 
 namespace _Scripts.UnitPools
 {
-    public class PreparationUnitPool : IPreparationUnitPool
+    public class BoardPreparationUnitPool : IBoardPreparationUnitPool
     {
         private readonly int _maxUnits;
 
-        private readonly IReactiveProperty<bool> _isBenchFull;
+        private readonly IReactiveProperty<bool> _isBoardFull;
 
-        public IList<IPreparationUnitModel> Units { get; }
+        public IList<IPreparationUnitModel> Units { get; private set; }
 
-        public IReadOnlyReactiveProperty<bool> IsBenchFull
+        public int MaxUnits
         {
-            get { return _isBenchFull; }
+            get { return _maxUnits; }
         }
 
-        public PreparationUnitPool(int maxUnits)
+        public int UnitCount
+        {
+            get { return Units.Count; }
+        }
+        
+        public IReadOnlyReactiveProperty<bool> IsBoardFull
+        {
+            get { return _isBoardFull; }
+        }
+
+        public BoardPreparationUnitPool(int maxUnits)
         {
             _maxUnits = maxUnits;
 
             Units = new List<IPreparationUnitModel>();
-            _isBenchFull = new ReactiveProperty<bool>();
+            _isBoardFull = new ReactiveProperty<bool>();
         }
 
         public void AddUnit(IPreparationUnitModel unit)
@@ -52,7 +62,7 @@ namespace _Scripts.UnitPools
 
         private void UpdateBenchCount()
         {
-            _isBenchFull.Value = Units.Count < _maxUnits;
+            _isBoardFull.Value = Units.Count < _maxUnits;
         }
     }
 }

@@ -22,10 +22,10 @@ namespace _Scripts.Services
                 randomNumber -= shopUnit.Value;
                 if (randomNumber > 0)
                     continue;
-
+                
                 return shopUnit.Key;
             }
-
+            
             return _allShopUnits.Last().Key;
         }
     }

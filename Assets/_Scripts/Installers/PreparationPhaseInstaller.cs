@@ -2,7 +2,6 @@ using Zenject;
 using _Scripts.Config;
 using _Scripts.Unit;
 using _Scripts.UnitPools;
-using _Scripts.Utility;
 
 namespace _Scripts.Installers
 {
@@ -18,12 +17,9 @@ namespace _Scripts.Installers
         public override void InstallBindings()
         {
             Container.BindFactory<int, PreparationUnitModel, PreparationUnitModel.Factory>();
-            Container.BindFactory<int, int, ShopUnitModel, ShopUnitModel.Factory>();
-            Container.BindFactory<IShopUnitModel, IShopUnitView, IDisposer, ShopUnitController, ShopUnitController.Factory>();
 
-            Container.BindInterfacesTo<ShopUnitPool>().AsSingle();
-            Container.BindInterfacesTo<PreparationUnitPool>().AsTransient().WithConcreteId(true).WithArguments(_boardConfig.BoardSize.x * _boardConfig.BoardSize.y);
-            Container.BindInterfacesTo<PreparationUnitPool>().AsTransient().WithConcreteId(false).WithArguments(_boardConfig.UnitInventorySize.x * _boardConfig.UnitInventorySize.y);
+            Container.BindInterfacesTo<BenchPreparationUnitPool>().AsTransient().WithArguments(_boardConfig.UnitInventorySize.x * _boardConfig.UnitInventorySize.y);
+            Container.BindInterfacesTo<BoardPreparationUnitPool>().AsTransient().WithArguments(_boardConfig.BoardSize.x * _boardConfig.BoardSize.y);
         }
     }
 }

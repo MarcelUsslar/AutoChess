@@ -8,8 +8,14 @@ namespace _Scripts.Config
         [SerializeField] private Vector2Int _boardSize;
         [SerializeField] private Vector2Int _unitInventorySize;
         
-        public Vector2Int BoardSize => _boardSize;
+        public Vector2Int BoardSize
+        {
+            get { return _boardSize; }
+        }
 
-        public Vector2Int UnitInventorySize => _unitInventorySize;
+        public Vector2Int UnitInventorySize
+        {
+            get { return _unitInventorySize; }
+        }
     }
 }

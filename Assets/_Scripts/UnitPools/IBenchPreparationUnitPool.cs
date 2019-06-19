@@ -3,7 +3,7 @@ using _Scripts.Unit;
 
 namespace _Scripts.UnitPools
 {
-    public interface IPreparationUnitPool : IUnitPool<IPreparationUnitModel>
+    public interface IBenchPreparationUnitPool : IUnitPool<IPreparationUnitModel>
     {
         IReadOnlyReactiveProperty<bool> IsBenchFull { get; }
     }

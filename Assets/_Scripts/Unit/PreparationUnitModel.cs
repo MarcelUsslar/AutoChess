@@ -16,7 +16,6 @@ namespace _Scripts.Unit
 
         public int Id { get; private set; }
         private readonly IReactiveProperty<Vector2Int> _position;
-        public IReadOnlyReactiveProperty<bool> IsPlacedOnBoard { get; private set; }
 
 
         public IReadOnlyReactiveProperty<Vector2Int> Position
@@ -24,43 +23,44 @@ namespace _Scripts.Unit
             get { return _position; }
         }
 
-        public PreparationUnitModel(int id,
-            [Inject(Id = true)] IUnitPool<IPreparationUnitModel> boardPool,
-            [Inject(Id = false)] IUnitPool<IPreparationUnitModel> benchPool,
-            IDisposer disposer)
+        public PreparationUnitModel(int id, IBoardPreparationUnitPool boardPool, IBenchPreparationUnitPool benchPool)
         {
             Id = id;
             _boardPool = boardPool;
             _benchPool = benchPool;
 
             _position = new ReactiveProperty<Vector2Int>();
-            IsPlacedOnBoard = _position.Select(IsOnBoard).ToReadOnlyReactiveProperty().AddToDisposer(disposer);
-
-            IsPlacedOnBoard.Subscribe(MoveToPool).AddToDisposer(disposer);
         }
 
-        public void MoveToPool(bool onBoard)
+        public void MoveTo(bool isOnBoard)
         {
-            if (onBoard)
+            MoveToPool(isOnBoard);
+            //SetPosition(isOnBoard ? _boardModel.GetFirstFreePosition() : _benchModel.GetFirstFreePosition());
+        }
+
+        public void MoveTo(bool isOnBoard, Vector2Int position)
+        {
+            MoveToPool(isOnBoard);
+            SetPosition(position);
+        }
+
+        private void MoveToPool(bool isOnBoard)
+        {
+            if (isOnBoard)
             {
                 _benchPool.RemoveUnit(this);
                 _boardPool.AddUnit(this);
             }
             else
             {
-                _benchPool.AddUnit(this);
-                _boardPool.RemoveUnit(this);
+                _benchPool.RemoveUnit(this);
+                _boardPool.AddUnit(this);
             }
         }
 
         public void SetPosition(Vector2Int position)
         {
             _position.Value = position;
-        }
-
-        private static bool IsOnBoard(Vector2Int currentPosition)
-        {
-            return currentPosition.x < 0;
         }
     }
 }
