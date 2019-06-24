@@ -1,4 +1,5 @@
 using Zenject;
+using _Scripts.Shop;
 using _Scripts.Unit;
 using _Scripts.UnitPools;
 

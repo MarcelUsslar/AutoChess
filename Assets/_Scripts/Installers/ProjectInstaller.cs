@@ -11,8 +11,13 @@ namespace _Scripts.Installers
             var disposer = Disposer.Create();
             Container.Bind<IDisposable>().FromInstance(disposer);
             Container.Bind<IDisposer>().FromInstance(disposer);
+
+            Container.BindInterfacesTo<UniRxEventBus>().AsSingle();
             
             ServiceInstaller.Install(Container);
+
+            PlayAreaInstaller.Install(Container);
+
             FactoryInstaller.Install(Container);
 
             PlayerInstaller.Install(Container);
