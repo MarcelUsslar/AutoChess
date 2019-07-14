@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UniRx;
+using UnityEngine;
 using _Scripts.Unit;
 
 namespace _Scripts.UnitPools
@@ -62,7 +63,7 @@ namespace _Scripts.UnitPools
 
         private void UpdateBenchCount()
         {
-            _isBenchFull.Value = Units.Count < _maxUnits;
+            _isBenchFull.Value = Units.Count >= _maxUnits;
         }
     }
 }

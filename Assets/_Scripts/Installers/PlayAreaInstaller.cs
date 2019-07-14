@@ -7,10 +7,11 @@ namespace _Scripts.Installers
     {
         public override void InstallBindings()
         {
-            Container.Bind<BenchModel>().WithId(PlayArea.Bench).AsSingle();
-            Container.Bind<BoardModel>().WithId(PlayArea.Board).AsSingle();
-            //Container.BindInterfacesTo<BenchModel>().AsSingle().WithConcreteId(PlayArea.Bench);
-            //Container.BindInterfacesTo<BoardModel>().AsSingle().WithConcreteId(PlayArea.Board);
+            Container.Bind<IPlayArea>().WithId(PlayArea.Bench).To<BenchModel>().AsSingle();
+            Container.Bind<IPlayArea>().WithId(PlayArea.Board).To<BoardModel>().AsSingle();
+
+            Container.Bind<IPlayAreaService>().WithId(PlayArea.Bench).To<BenchService>().AsSingle().NonLazy();
+            Container.Bind<IPlayAreaService>().WithId(PlayArea.Board).To<BoardService>().AsSingle().NonLazy();
         }
     }
 }

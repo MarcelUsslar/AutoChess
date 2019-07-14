@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Diagnostics;
 using UniRx;
 using Zenject;
 using _Scripts.Config;
 using _Scripts.Factories;
+using _Scripts.Unit;
 using _Scripts.UnitPools;
 using _Scripts.Utility;
-using Debug = UnityEngine.Debug;
 
-namespace _Scripts.Unit
+namespace _Scripts.Shop
 {
     public class ShopUnitModel : IShopUnitModel
     {

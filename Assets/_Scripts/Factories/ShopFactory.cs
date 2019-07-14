@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using _Scripts.Installers;
+using _Scripts.Shop;
 using _Scripts.Unit;
-using _Scripts.Utility;
 
 namespace _Scripts.Factories
 {

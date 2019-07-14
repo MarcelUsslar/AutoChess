@@ -1,8 +1,9 @@
 ﻿using UniRx;
 using Zenject;
+using _Scripts.Unit;
 using _Scripts.Utility;
 
-namespace _Scripts.Unit
+namespace _Scripts.Shop
 {
     public class ShopUnitController
     {

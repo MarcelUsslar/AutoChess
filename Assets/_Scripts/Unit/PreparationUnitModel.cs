@@ -18,16 +18,17 @@ namespace _Scripts.Unit
         private readonly IUnitPool<IPreparationUnitModel> _benchPool;
 
         public int Id { get; private set; }
+        public bool IsOnBoard { get; private set; }
         private readonly IReactiveProperty<Vector2Int> _position;
-
-
+        
         public IReadOnlyReactiveProperty<Vector2Int> Position
         {
             get { return _position; }
         }
 
         public PreparationUnitModel(int id,
-            [Inject(Id = PlayArea.Bench)] BenchModel benchModel, [Inject(Id = PlayArea.Board)] BoardModel boardModel,
+            [Inject(Id = PlayArea.Bench)] IPlayArea benchModel,
+            [Inject(Id = PlayArea.Board)] IPlayArea boardModel,
             IBoardPreparationUnitPool boardPool, IBenchPreparationUnitPool benchPool)
         {
             Id = id;
@@ -36,6 +37,7 @@ namespace _Scripts.Unit
             _boardPool = boardPool;
             _benchPool = benchPool;
 
+            IsOnBoard = false;
             _position = new ReactiveProperty<Vector2Int>();
         }
 
@@ -53,6 +55,8 @@ namespace _Scripts.Unit
 
         private void MoveToPool(bool isOnBoard)
         {
+            IsOnBoard = isOnBoard;
+
             if (isOnBoard)
             {
                 _benchPool.RemoveUnit(this);
@@ -60,12 +64,12 @@ namespace _Scripts.Unit
             }
             else
             {
-                _benchPool.RemoveUnit(this);
-                _boardPool.AddUnit(this);
+                _benchPool.AddUnit(this);
+                _boardPool.RemoveUnit(this);
             }
         }
 
-        public void SetPosition(Vector2Int position)
+        private void SetPosition(Vector2Int position)
         {
             _position.Value = position;
         }

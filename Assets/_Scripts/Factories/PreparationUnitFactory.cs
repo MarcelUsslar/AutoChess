@@ -1,4 +1,5 @@
 ﻿using Zenject;
+using _Scripts.Installers;
 using _Scripts.PlayAreas;
 using _Scripts.Unit;
 
@@ -6,23 +7,32 @@ namespace _Scripts.Factories
 {
     public class PreparationUnitFactory : IPreparationUnitFactory
     {
+        private readonly PreparationUnitController.Factory _preparationUnitControllerFactory;
         private readonly PreparationUnitModel.Factory _preparationUnitModelFactory;
+        private readonly IViewFactory<PreparationUnitView> _preparationUnitViewFactory;
         private readonly IPlayArea _benchModel;
 
-        public PreparationUnitFactory(PreparationUnitModel.Factory preparationUnitModelFactory,
-            [Inject(Id = PlayArea.Bench)] BenchModel benchModel)
+        public PreparationUnitFactory(PreparationUnitController.Factory preparationUnitControllerFactory,
+            PreparationUnitModel.Factory preparationUnitModelFactory,
+            IViewFactory<PreparationUnitView> preparationUnitViewFactory,
+            [Inject(Id = PlayArea.Bench)] IPlayArea benchModel)
         {
+            _preparationUnitControllerFactory = preparationUnitControllerFactory;
             _preparationUnitModelFactory = preparationUnitModelFactory;
+            _preparationUnitViewFactory = preparationUnitViewFactory;
             _benchModel = benchModel;
         }
 
         public IPreparationUnitModel Create(IShopUnitModel shopUnit)
         {
-            var unit = _preparationUnitModelFactory.Create(shopUnit.Id.Value);
+            var model = _preparationUnitModelFactory.Create(shopUnit.Id.Value);
+            model.MoveTo(false, _benchModel.GetFirstFreePosition());
             
-            unit.SetPosition(_benchModel.GetFirstFreePosition());
+            var view = _preparationUnitViewFactory.Instantiate();
             
-            return unit;
+            _preparationUnitControllerFactory.Create(model, view);
+
+            return model;
         }
     }
 }

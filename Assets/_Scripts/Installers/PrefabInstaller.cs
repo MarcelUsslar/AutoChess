@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using _Scripts.PlayAreas;
+using _Scripts.Shop;
 using _Scripts.Unit;
 
 namespace _Scripts.Installers
@@ -9,11 +11,19 @@ namespace _Scripts.Installers
     [CreateAssetMenu(fileName = "PrefabInstaller", menuName = "Installers/PrefabInstaller")]
     public class PrefabInstaller : ScriptableObjectInstaller<PrefabInstaller>
     {
+        [SerializeField] private BenchView _benchView;
+        [SerializeField] private BoardView _boardView;
+        [SerializeField] private FieldView _fieldView;
+        [SerializeField] private PreparationUnitView _preparationUnitView;
         [SerializeField] private ShopUnitView _shopUnitView;
         [SerializeField] private ShopPanelView _shopPanelView;
 
         public override void InstallBindings()
         {
+            BindSingletonView(_benchView, true);
+            BindSingletonView(_boardView, true);
+            BindViewFactory(_fieldView);
+            BindViewFactory(_preparationUnitView);
             BindViewFactory(_shopUnitView);
             BindSingletonView(_shopPanelView, true);
         }

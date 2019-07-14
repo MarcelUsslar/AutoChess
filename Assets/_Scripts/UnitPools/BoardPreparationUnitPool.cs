@@ -62,7 +62,7 @@ namespace _Scripts.UnitPools
 
         private void UpdateBenchCount()
         {
-            _isBoardFull.Value = Units.Count < _maxUnits;
+            _isBoardFull.Value = Units.Count >= _maxUnits;
         }
     }
 }

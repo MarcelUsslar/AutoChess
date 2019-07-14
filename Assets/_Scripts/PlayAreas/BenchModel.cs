@@ -24,7 +24,7 @@ namespace _Scripts.PlayAreas
             {
                 if (_benchUnitPool.Units.Any(model => model.Position.Value.x == i))
                     continue;
-
+                
                 return new Vector2Int(i, 0);
             }
 

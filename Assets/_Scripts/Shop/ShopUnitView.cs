@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Scripts.Unit
+namespace _Scripts.Shop
 {
     public class ShopUnitView : MonoBehaviour, IShopUnitView
     {
