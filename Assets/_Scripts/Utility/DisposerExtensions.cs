@@ -1,4 +1,5 @@
 ﻿using System;
+using UniRx;
 
 namespace _Scripts.Utility
 {
@@ -17,6 +18,11 @@ namespace _Scripts.Utility
             {
                 action(i);
             }
+        }
+
+        public static IDisposable SubscribeBlind<T>(this IObservable<T> source, Action action)
+        {
+            return source.Subscribe(_ => action());
         }
     }
 

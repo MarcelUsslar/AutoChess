@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using _Scripts.Utility;
 
-namespace _Scripts.Unit
+namespace _Scripts.Shop
 {
-    public interface IShopPanelView
+    public interface IShopPanelView : IPanelView
     {
         Transform UnitParent { get; }
         Button CloseButton { get; }
         Button BackgroundButton { get; }
-
-        void OpenPanel();
-        void ClosePanel();
     }
 }

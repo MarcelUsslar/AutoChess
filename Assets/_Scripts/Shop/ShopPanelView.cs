@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using _Scripts.Utility;
 
-namespace _Scripts.Unit
+namespace _Scripts.Shop
 {
-    public class ShopPanelView : MonoBehaviour, IShopPanelView
+    public class ShopPanelView : PanelView, IShopPanelView
     {
         [SerializeField] private Transform _unitParent;
         [SerializeField] private Button _closeButton;
@@ -22,16 +23,6 @@ namespace _Scripts.Unit
         public Button BackgroundButton
         {
             get { return _backgroundButton; }
-        }
-
-        public void OpenPanel()
-        {
-            gameObject.SetActive(true);
-        }
-
-        public void ClosePanel()
-        {
-            gameObject.SetActive(false);
         }
     }
 }

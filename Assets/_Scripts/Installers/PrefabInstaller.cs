@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using _Scripts.Hud;
 using _Scripts.PlayAreas;
 using _Scripts.Shop;
 using _Scripts.Unit;
@@ -14,6 +15,7 @@ namespace _Scripts.Installers
         [SerializeField] private BenchView _benchView;
         [SerializeField] private BoardView _boardView;
         [SerializeField] private FieldView _fieldView;
+        [SerializeField] private HudView _hudView;
         [SerializeField] private PreparationUnitView _preparationUnitView;
         [SerializeField] private ShopUnitView _shopUnitView;
         [SerializeField] private ShopPanelView _shopPanelView;
@@ -22,10 +24,11 @@ namespace _Scripts.Installers
         {
             BindSingletonView(_benchView, true);
             BindSingletonView(_boardView, true);
+            BindSingletonView(_hudView, true);
             BindViewFactory(_fieldView);
             BindViewFactory(_preparationUnitView);
             BindViewFactory(_shopUnitView);
-            BindSingletonView(_shopPanelView, true);
+            BindSingletonView(_shopPanelView);
         }
 
         #region ViewFactories
