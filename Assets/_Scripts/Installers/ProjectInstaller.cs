@@ -1,5 +1,4 @@
 using System;
-using UniRx;
 using Zenject;
 using _Scripts.Utility;
 
@@ -10,12 +9,27 @@ namespace _Scripts.Installers
         public override void InstallBindings()
         {
             var disposer = Disposer.Create();
-            ((IDisposable) disposer).AddTo(gameObject);
-
+            Container.Bind<IDisposable>().FromInstance(disposer);
             Container.Bind<IDisposer>().FromInstance(disposer);
 
+            Container.BindInterfacesTo<UniRxEventBus>().AsSingle();
+            
             ServiceInstaller.Install(Container);
-            BoardInstaller.Install(Container);
+
+            PlayAreaInstaller.Install(Container);
+
+            FactoryInstaller.Install(Container);
+
+            PlayerInstaller.Install(Container);
+
+            PreparationPhaseInstaller.Install(Container);
+            CombatPhaseInstaller.Install(Container);
+
+            HudInstaller.Install(Container);
+
+            ShopInstaller.Install(Container);
+
+            RoundInstaller.Install(Container);
         }
     }
 }

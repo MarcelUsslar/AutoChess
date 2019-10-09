@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7478b3bad0feb244a8754a63abdd2a0e, type: 3}
+  m_Name: PrefabInstaller
+  m_EditorClassIdentifier: 
+  _benchView: {fileID: 114569055922721862, guid: 7bd62b13168a3d14e9fdf44c04e0e2f2,
+    type: 2}
+  _boardView: {fileID: 114715148161334850, guid: 029433360f266c44d8ae510b9051f303,
+    type: 2}
+  _fieldView: {fileID: 114662752277366788, guid: 697b49ef812a9234cacf8f5ed0620d7d,
+    type: 2}
+  _hudView: {fileID: 114824465891297736, guid: 500bcfe9a0fbd884198816214529a662, type: 2}
+  _preparationUnitView: {fileID: 114878218873688340, guid: 9395790ab5a0dcb4f90a4446798f3daf,
+    type: 2}
+  _shopUnitView: {fileID: 114861231596588222, guid: 9b8622c7e77dd9f48b0340f4858fd1f1,
+    type: 2}
+  _shopPanelView: {fileID: 114171029624803818, guid: fb2e80435540f3b46b7acbcb82cb6453,
+    type: 2}
