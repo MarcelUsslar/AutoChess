@@ -9,5 +9,6 @@ namespace _Scripts.Shop
         Transform UnitParent { get; }
         Button CloseButton { get; }
         Button BackgroundButton { get; }
+        int CurrentCash { set; }
     }
 }

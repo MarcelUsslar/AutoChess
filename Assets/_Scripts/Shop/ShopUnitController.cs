@@ -10,15 +10,17 @@ namespace _Scripts.Shop
         public class Factory : PlaceholderFactory<IShopUnitModel, IShopUnitView, ShopUnitController>
         { }
 
-        private ShopUnitController(IShopUnitModel unitModel, IShopUnitView unitView, IDisposer disposer)
+        private ShopUnitController(IShopUnitModel model, IShopUnitView view, IDisposer disposer)
         {
-            unitModel.CanBeBought
-                .Subscribe(purchasable => unitView.Purchasable = purchasable)
+            model.Cost.Subscribe(cost => view.Cost = cost).AddToDisposer(disposer);
+
+            model.CanBeBought
+                .Subscribe(purchasable => view.Purchasable = purchasable)
                 .AddToDisposer(disposer);
 
-            unitView.BuyButton.OnClickAsObservable()
-                .Where(_ => unitModel.CanBeBought.Value)
-                .Subscribe(_ => unitModel.Buy())
+            view.BuyButton.OnClickAsObservable()
+                .Where(_ => model.CanBeBought.Value)
+                .Subscribe(_ => model.Buy())
                 .AddToDisposer(disposer);
         }
     }

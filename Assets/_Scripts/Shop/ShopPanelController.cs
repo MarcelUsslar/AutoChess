@@ -1,5 +1,4 @@
-﻿using System;
-using UniRx;
+﻿using UniRx;
 using _Scripts.Config;
 using _Scripts.Factories;
 using _Scripts.Services;
@@ -14,16 +13,19 @@ namespace _Scripts.Shop
         private readonly IEventBus _eventBus;
 
         public ShopPanelController(IShopPanelView view, IShopConfig config, IShopFactory factory,
-            IUnitPool<IShopUnitModel> shopPool, IRandomUnitGenerator unitGenerator, IEventBus eventBus, IDisposer disposer)
+            IUnitPool<IShopUnitModel> shopPool, IRandomUnitGenerator unitGenerator, ICashModel cashModel,
+            IEventBus eventBus, IDisposer disposer)
         {
             _eventBus = eventBus;
+
             view.CloseButton.OnClickAsObservable()
                 .Merge(view.BackgroundButton.OnClickAsObservable())
                 .SubscribeBlind(() => ClosePanel(view))
                 .AddToDisposer(disposer);
             
-            // open panel on event
             eventBus.OnEvent<OpenShopCommand>().SubscribeBlind(view.Open).AddToDisposer(disposer);
+
+            cashModel.CurrentCash.Subscribe(cash => view.CurrentCash = cash).AddToDisposer(disposer);
 
             // only spawn items once shop is first opened
             AddShopUnits(config.ShopEntryAmount, view, shopPool, factory, unitGenerator);

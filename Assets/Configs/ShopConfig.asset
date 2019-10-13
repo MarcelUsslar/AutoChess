@@ -13,12 +13,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shopEntryAmount: 5
   _shopEntries:
-  - UnitId: 0
-    UnitWeight: 10
-    UnitCost: 1
   - UnitId: 1
     UnitWeight: 10
-    UnitCost: 2
+    UnitCost: 1
   - UnitId: 2
+    UnitWeight: 10
+    UnitCost: 2
+  - UnitId: 3
     UnitWeight: 10
     UnitCost: 3

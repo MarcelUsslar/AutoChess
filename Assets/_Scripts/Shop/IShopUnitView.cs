@@ -6,5 +6,6 @@ namespace _Scripts.Shop
     {
         bool Purchasable { set; }
         Button BuyButton { get; }
+        int Cost { set; }
     }
 }
