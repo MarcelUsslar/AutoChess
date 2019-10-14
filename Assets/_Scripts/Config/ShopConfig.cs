@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using _Scripts.Unit;
 
 namespace _Scripts.Config
 {
@@ -15,6 +16,9 @@ namespace _Scripts.Config
             public int UnitId;
             public int UnitWeight;
             public int UnitCost;
+            [Header("Preview")]
+            public UnitPreviewType PreviewType;
+            public RenderTexture PreviewTexture;
         }
 #pragma warning restore 0649
 
@@ -34,6 +38,16 @@ namespace _Scripts.Config
         public int GetCost(int id)
         {
             return _shopEntries.First(mapping => mapping.UnitId == id).UnitCost;
+        }
+
+        public UnitPreviewType GetPreviewType(int id)
+        {
+            return _shopEntries.First(mapping => mapping.UnitId == id).PreviewType;
+        }
+
+        public RenderTexture GetPreviewTexture(int id)
+        {
+            return _shopEntries.First(mapping => mapping.UnitId == id).PreviewTexture;
         }
     }
 }

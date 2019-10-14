@@ -6,6 +6,7 @@ namespace _Scripts.Shop
     public class ShopUnitView : MonoBehaviour, IShopUnitView
     {
         [SerializeField] private Text _costText;
+        [SerializeField] private RawImage _previewImage;
         [SerializeField] private Button _purchaseButton;
 
         public bool Purchasable
@@ -16,6 +17,11 @@ namespace _Scripts.Shop
         public int Cost
         {
             set { _costText.text = string.Format("{0} Cash", value); }
+        }
+
+        public RenderTexture Preview
+        {
+            set { _previewImage.texture = value; }
         }
 
         public Button BuyButton

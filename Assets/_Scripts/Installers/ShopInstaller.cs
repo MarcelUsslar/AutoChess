@@ -12,6 +12,9 @@ namespace _Scripts.Installers
             Container.BindFactory<int, ShopUnitModel, ShopUnitModel.Factory>();
             Container.BindFactory<IShopUnitModel, IShopUnitView, ShopUnitController, ShopUnitController.Factory>();
 
+            Container.BindInterfacesTo<PreviewUnitPoolModel>().AsSingle();
+            Container.Instantiate<PreviewUnitPoolController>();
+
             Container.BindInterfacesTo<ShopUnitPool>().AsSingle();
             Container.Instantiate<ShopPanelController>();
         }

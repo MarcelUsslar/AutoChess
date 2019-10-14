@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Scripts.Shop
 {
@@ -7,5 +8,6 @@ namespace _Scripts.Shop
         bool Purchasable { set; }
         Button BuyButton { get; }
         int Cost { set; }
+        RenderTexture Preview { set; }
     }
 }

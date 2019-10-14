@@ -24,6 +24,15 @@ namespace _Scripts.Utility
         {
             return source.Subscribe(_ => action());
         }
+
+        public static IObservable<bool> IfTrue(this IObservable<bool> source)
+        {
+            return source.Where(boolean => boolean);
+        }
+        public static IObservable<bool> IfFalse(this IObservable<bool> source)
+        {
+            return source.Where(boolean => !boolean);
+        }
     }
 
     public static class DisposerExtensions

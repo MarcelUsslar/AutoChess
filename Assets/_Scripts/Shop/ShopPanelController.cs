@@ -10,12 +10,18 @@ namespace _Scripts.Shop
 {
     public class ShopPanelController
     {
+        private readonly IShopConfig _config;
+        private readonly IUnitPool<IShopUnitModel> _shopPool;
+        private readonly IPreviewUnitPoolModel _previewUnitPoolModel;
         private readonly IEventBus _eventBus;
 
         public ShopPanelController(IShopPanelView view, IShopConfig config, IShopFactory factory,
             IUnitPool<IShopUnitModel> shopPool, IRandomUnitGenerator unitGenerator, ICashModel cashModel,
-            IEventBus eventBus, IDisposer disposer)
+            IPreviewUnitPoolModel previewUnitPoolModel, IEventBus eventBus, IDisposer disposer)
         {
+            _config = config;
+            _shopPool = shopPool;
+            _previewUnitPoolModel = previewUnitPoolModel;
             _eventBus = eventBus;
 
             view.CloseButton.OnClickAsObservable()
@@ -23,7 +29,7 @@ namespace _Scripts.Shop
                 .SubscribeBlind(() => ClosePanel(view))
                 .AddToDisposer(disposer);
             
-            eventBus.OnEvent<OpenShopCommand>().SubscribeBlind(view.Open).AddToDisposer(disposer);
+            eventBus.OnEvent<OpenShopCommand>().SubscribeBlind(() => OpenPanel(view)).AddToDisposer(disposer);
 
             cashModel.CurrentCash.Subscribe(cash => view.CurrentCash = cash).AddToDisposer(disposer);
 
@@ -31,8 +37,19 @@ namespace _Scripts.Shop
             AddShopUnits(config.ShopEntryAmount, view, shopPool, factory, unitGenerator);
         }
 
-        private void ClosePanel(IShopPanelView view)
+        private void OpenPanel(IPanelView view)
         {
+            _shopPool.Units.ForEach(model =>
+                _previewUnitPoolModel.DisplayPreview(_config.GetPreviewType(model.Id.Value)));
+
+            view.Open();
+        }
+
+        private void ClosePanel(IPanelView view)
+        {
+            _shopPool.Units.ForEach(model =>
+                _previewUnitPoolModel.DisablePreview(_config.GetPreviewType(model.Id.Value)));
+
             view.Close();
             _eventBus.Publish(new CloseShopEvent());
         }

@@ -24,3 +24,9 @@ MonoBehaviour:
     type: 2}
   _shopPanelView: {fileID: 114171029624803818, guid: fb2e80435540f3b46b7acbcb82cb6453,
     type: 2}
+  _cubePreview: {fileID: 114349722754450926, guid: 3b7bc968f7f0a23429f5b908c6c9bc34,
+    type: 2}
+  _cylinderPreview: {fileID: 114976761125772778, guid: 26dd314f46a647c4b9e9ecc49bcdb55d,
+    type: 2}
+  _spherePreview: {fileID: 114066719033352348, guid: b772f5af8b7af214a9331d0c4d7425e0,
+    type: 2}

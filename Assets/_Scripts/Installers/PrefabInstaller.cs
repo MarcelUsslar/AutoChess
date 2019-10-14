@@ -20,6 +20,11 @@ namespace _Scripts.Installers
         [SerializeField] private ShopUnitView _shopUnitView;
         [SerializeField] private ShopPanelView _shopPanelView;
 
+        [Header("Preview Views")]
+        [SerializeField] private PreviewUnitView _cubePreview;
+        [SerializeField] private PreviewUnitView _cylinderPreview;
+        [SerializeField] private PreviewUnitView _spherePreview;
+
         public override void InstallBindings()
         {
             BindSingletonView(_benchView, true);
@@ -29,6 +34,11 @@ namespace _Scripts.Installers
             BindViewFactory(_preparationUnitView);
             BindViewFactory(_shopUnitView);
             BindSingletonView(_shopPanelView);
+
+            // preview views
+            BindSingletonView(_cubePreview, UnitPreviewType.Cube);
+            BindSingletonView(_cylinderPreview, UnitPreviewType.Cylinder);
+            BindSingletonView(_spherePreview, UnitPreviewType.Sphere);
         }
 
         #region ViewFactories
@@ -55,6 +65,13 @@ namespace _Scripts.Installers
             view.gameObject.SetActive(activeByDefault);
             Container.BindInterfacesAndSelfTo<TView>().FromComponentInNewPrefab(view.gameObject)
                 .UnderTransformGroup("Singleton Views").AsSingle();
+        }
+
+        private void BindSingletonView<TView>(TView view, object id, bool activeByDefault = false) where TView : MonoBehaviour
+        {
+            view.gameObject.SetActive(activeByDefault);
+            Container.Bind<TView>().WithId(id).FromComponentInNewPrefab(view.gameObject)
+                .UnderTransformGroup("Singleton Views").AsTransient();
         }
 
         private class ViewFactory<TView> : IViewFactory<TView> where TView : MonoBehaviour
