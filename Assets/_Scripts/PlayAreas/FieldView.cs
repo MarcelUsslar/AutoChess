@@ -1,10 +1,25 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace _Scripts.PlayAreas
 {
-    public class FieldView : MonoBehaviour
+    public class FieldView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IFieldView
     {
         [SerializeField] private Transform _unitParent;
+        [SerializeField] private MeshRenderer _fieldRenderer;
+
+        private Subject<UniRx.Unit> _onPointerEnterAsObservable;
+        private Subject<UniRx.Unit> _onPointerExitAsObservable;
+
+        public IObservable<UniRx.Unit> OnPointerEnterAsObservable
+        {
+            get { return _onPointerEnterAsObservable ?? (_onPointerEnterAsObservable = new Subject<UniRx.Unit>()); }
+        }
+        public IObservable<UniRx.Unit> OnPointerExitAsObservable
+        {
+            get { return _onPointerExitAsObservable ?? (_onPointerExitAsObservable = new Subject<UniRx.Unit>()); }
+        }
 
         public Vector3 Position
         {
@@ -14,6 +29,26 @@ namespace _Scripts.PlayAreas
         public Transform UnitParent
         {
             get { return _unitParent; }
+        }
+
+        public Material FieldMaterial
+        {
+            set { _fieldRenderer.material = value; }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (_onPointerEnterAsObservable != null)
+            {
+                _onPointerEnterAsObservable.OnNext(UniRx.Unit.Default);
+            }
+        }
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (_onPointerExitAsObservable != null)
+            {
+                _onPointerExitAsObservable.OnNext(UniRx.Unit.Default);
+            }
         }
     }
 }

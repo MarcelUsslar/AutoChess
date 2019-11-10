@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Name: ConfigInstaller
   m_EditorClassIdentifier: 
   _boardConfig: {fileID: 11400000, guid: 51340bb48d205a4439073f635b104dc3, type: 2}
+  _fieldConfig: {fileID: 11400000, guid: 5907d1a451217564b828d61db84ca5e0, type: 2}
   _shopConfig: {fileID: 11400000, guid: b1bafbbfefab260429d5678e97decf60, type: 2}

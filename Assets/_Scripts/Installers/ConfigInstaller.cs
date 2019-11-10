@@ -1,6 +1,7 @@
 using UnityEngine;
 using Zenject;
 using _Scripts.Config;
+using _Scripts.PlayAreas;
 
 namespace _Scripts.Installers
 {
@@ -8,11 +9,13 @@ namespace _Scripts.Installers
     public class ConfigInstaller : ScriptableObjectInstaller<ConfigInstaller>
     {
         [SerializeField] private BoardConfig _boardConfig;
+        [SerializeField] private FieldConfig _fieldConfig;
         [SerializeField] private ShopConfig _shopConfig;
 
         public override void InstallBindings()
         {
             Container.BindInterfacesTo<BoardConfig>().FromInstance(_boardConfig).AsSingle();
+            Container.BindInterfacesTo<FieldConfig>().FromInstance(_fieldConfig).AsSingle();
             Container.BindInterfacesTo<ShopConfig>().FromInstance(_shopConfig).AsSingle();
         }
     }

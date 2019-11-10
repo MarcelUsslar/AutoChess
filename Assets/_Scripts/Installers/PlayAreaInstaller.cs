@@ -7,6 +7,8 @@ namespace _Scripts.Installers
     {
         public override void InstallBindings()
         {
+            Container.BindFactory<IFieldView, FieldController, FieldController.Factory>();
+
             Container.Bind<IPlayArea>().WithId(PlayArea.Bench).To<BenchModel>().AsSingle();
             Container.Bind<IPlayArea>().WithId(PlayArea.Board).To<BoardModel>().AsSingle();
 

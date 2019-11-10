@@ -2,6 +2,6 @@
 {
     public interface IPlayAreaService
     {
-        FieldView GetField(int x, int y);
+        IFieldView GetField(int x, int y);
     }
 }

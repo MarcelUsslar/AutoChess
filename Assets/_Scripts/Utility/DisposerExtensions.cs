@@ -20,6 +20,11 @@ namespace _Scripts.Utility
             }
         }
 
+        public static IDisposable Subscribe(this IObservable<UniRx.Unit> observable, Action action)
+        {
+            return observable.Subscribe(unit => action());
+        }
+
         public static IDisposable SubscribeBlind<T>(this IObservable<T> source, Action action)
         {
             return source.Subscribe(_ => action());
