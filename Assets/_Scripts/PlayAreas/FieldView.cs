@@ -4,13 +4,14 @@ using UnityEngine.EventSystems;
 
 namespace _Scripts.PlayAreas
 {
-    public class FieldView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IFieldView
+    public class FieldView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IFieldView
     {
         [SerializeField] private Transform _unitParent;
         [SerializeField] private MeshRenderer _fieldRenderer;
 
         private Subject<UniRx.Unit> _onPointerEnterAsObservable;
         private Subject<UniRx.Unit> _onPointerExitAsObservable;
+        private Subject<UniRx.Unit> _onPointerClickAsObservable;
 
         public IObservable<UniRx.Unit> OnPointerEnterAsObservable
         {
@@ -19,6 +20,10 @@ namespace _Scripts.PlayAreas
         public IObservable<UniRx.Unit> OnPointerExitAsObservable
         {
             get { return _onPointerExitAsObservable ?? (_onPointerExitAsObservable = new Subject<UniRx.Unit>()); }
+        }
+        public IObservable<UniRx.Unit> OnPointerClickAsObservable
+        {
+            get { return _onPointerClickAsObservable ?? (_onPointerClickAsObservable = new Subject<UniRx.Unit>()); }
         }
 
         public Vector3 Position
@@ -48,6 +53,13 @@ namespace _Scripts.PlayAreas
             if (_onPointerExitAsObservable != null)
             {
                 _onPointerExitAsObservable.OnNext(UniRx.Unit.Default);
+            }
+        }
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (_onPointerClickAsObservable != null)
+            {
+                _onPointerClickAsObservable.OnNext(UniRx.Unit.Default);
             }
         }
     }

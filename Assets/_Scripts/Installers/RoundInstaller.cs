@@ -1,6 +1,5 @@
-using System;
 using Zenject;
-using _Scripts.Utility;
+using _Scripts.Unit;
 
 namespace _Scripts.Installers
 {
@@ -8,10 +7,7 @@ namespace _Scripts.Installers
     {
         public override void InstallBindings()
         {
-            var disposer = Disposer.Create();
-            Container.Rebind<IDisposer>().FromInstance(disposer);
-            Container.Bind<IDisposable>().FromInstance(disposer);
-            
+            Container.Instantiate<UnitManualMovementController>();
             // TODO create board controller and visuals
         }
     }

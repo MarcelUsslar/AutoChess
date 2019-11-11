@@ -18,9 +18,14 @@ namespace _Scripts.Unit
         private readonly IUnitPool<IPreparationUnitModel> _benchPool;
 
         public int Id { get; private set; }
-        public bool IsOnBoard { get; private set; }
+
+        private readonly IReactiveProperty<bool> _isOnBoard;
         private readonly IReactiveProperty<Vector2Int> _position;
-        
+
+        public IReadOnlyReactiveProperty<bool> IsOnBoard
+        {
+            get { return _isOnBoard; }
+        }
         public IReadOnlyReactiveProperty<Vector2Int> Position
         {
             get { return _position; }
@@ -37,7 +42,7 @@ namespace _Scripts.Unit
             _boardPool = boardPool;
             _benchPool = benchPool;
 
-            IsOnBoard = false;
+            _isOnBoard = new ReactiveProperty<bool>(false);
             _position = new ReactiveProperty<Vector2Int>();
         }
 
@@ -55,7 +60,7 @@ namespace _Scripts.Unit
 
         private void MoveToPool(bool isOnBoard)
         {
-            IsOnBoard = isOnBoard;
+            _isOnBoard.Value = isOnBoard;
 
             if (isOnBoard)
             {

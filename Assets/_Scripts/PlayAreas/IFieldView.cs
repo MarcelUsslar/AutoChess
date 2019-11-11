@@ -7,6 +7,8 @@ namespace _Scripts.PlayAreas
     {
         IObservable<UniRx.Unit> OnPointerEnterAsObservable { get; }
         IObservable<UniRx.Unit> OnPointerExitAsObservable { get; }
+        IObservable<UniRx.Unit> OnPointerClickAsObservable { get; }
+
         Vector3 Position { set; }
         Transform UnitParent { get; }
         Material FieldMaterial { set; }
