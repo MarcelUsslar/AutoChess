@@ -10,16 +10,18 @@ namespace _Scripts.Shop
 {
     public class ShopPanelController
     {
-        private readonly IShopConfig _config;
+        private readonly IShopConfig _shopConfig;
+        private readonly IUnitConfig _unitConfig;
         private readonly IUnitPool<IShopUnitModel> _shopPool;
         private readonly IPreviewUnitPoolModel _previewUnitPoolModel;
         private readonly IEventBus _eventBus;
 
-        public ShopPanelController(IShopPanelView view, IShopConfig config, IShopFactory factory,
+        public ShopPanelController(IShopPanelView view, IShopConfig shopConfig, IUnitConfig unitConfig, IShopFactory factory,
             IUnitPool<IShopUnitModel> shopPool, IRandomUnitGenerator unitGenerator, ICashModel cashModel,
             IPreviewUnitPoolModel previewUnitPoolModel, IEventBus eventBus, IDisposer disposer)
         {
-            _config = config;
+            _shopConfig = shopConfig;
+            _unitConfig = unitConfig;
             _shopPool = shopPool;
             _previewUnitPoolModel = previewUnitPoolModel;
             _eventBus = eventBus;
@@ -34,13 +36,13 @@ namespace _Scripts.Shop
             cashModel.CurrentCash.Subscribe(cash => view.CurrentCash = cash).AddToDisposer(disposer);
 
             // only spawn items once shop is first opened
-            AddShopUnits(config.ShopEntryAmount, view, shopPool, factory, unitGenerator);
+            AddShopUnits(shopConfig.ShopEntryAmount, view, shopPool, factory, unitGenerator);
         }
 
         private void OpenPanel(IPanelView view)
         {
             _shopPool.Units.ForEach(model =>
-                _previewUnitPoolModel.DisplayPreview(_config.GetPreviewType(model.Id.Value)));
+                _previewUnitPoolModel.DisplayPreview(_unitConfig.GetPreviewType(model.Id.Value)));
 
             view.Open();
         }
@@ -48,7 +50,7 @@ namespace _Scripts.Shop
         private void ClosePanel(IPanelView view)
         {
             _shopPool.Units.ForEach(model =>
-                _previewUnitPoolModel.DisablePreview(_config.GetPreviewType(model.Id.Value)));
+                _previewUnitPoolModel.DisablePreview(_unitConfig.GetPreviewType(model.Id.Value)));
 
             view.Close();
             _eventBus.Publish(new CloseShopEvent());

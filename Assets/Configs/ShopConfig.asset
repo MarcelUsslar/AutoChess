@@ -16,15 +16,9 @@ MonoBehaviour:
   - UnitId: 1
     UnitWeight: 10
     UnitCost: 1
-    PreviewType: 0
-    PreviewTexture: {fileID: 8400000, guid: 5f69ebe1bda5efe44a810bfea57d851a, type: 2}
   - UnitId: 2
     UnitWeight: 10
     UnitCost: 2
-    PreviewType: 1
-    PreviewTexture: {fileID: 8400000, guid: 8ca6ebc9b17e21e42885d0c0f5e83e62, type: 2}
   - UnitId: 3
     UnitWeight: 10
     UnitCost: 3
-    PreviewType: 2
-    PreviewTexture: {fileID: 8400000, guid: b0e0f83da79a24744b46340acce5a555, type: 2}

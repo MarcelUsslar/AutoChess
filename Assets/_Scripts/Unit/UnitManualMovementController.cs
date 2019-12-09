@@ -65,7 +65,7 @@ namespace _Scripts.Unit
             {
                 if (unitOnClickedArea != null)
                 {
-                    unitOnClickedArea.MoveTo(_selectedUnit.Value.IsOnBoard.Value, _selectedUnit.Value.Position.Value);
+                    unitOnClickedArea.MoveTo(_selectedUnit.Value.IsOnBoard, _selectedUnit.Value.Position.Value);
                 }
 
                 _selectedUnit.Value.MoveTo(isBoard, new Vector2Int(x, y));

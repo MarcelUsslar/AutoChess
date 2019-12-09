@@ -10,9 +10,9 @@ namespace _Scripts.Unit
         private readonly PreviewUnitView _cylinderPreviewUnitView;
         private readonly PreviewUnitView _spherePreviewUnitView;
 
-        public PreviewUnitPoolController([Inject(Id = UnitPreviewType.Cube)] PreviewUnitView cubePreviewUnitView,
-            [Inject(Id = UnitPreviewType.Cylinder)] PreviewUnitView cylinderPreviewUnitView,
-            [Inject(Id = UnitPreviewType.Sphere)] PreviewUnitView spherePreviewUnitView,
+        public PreviewUnitPoolController([Inject(Id = UnitType.Cube)] PreviewUnitView cubePreviewUnitView,
+            [Inject(Id = UnitType.Cylinder)] PreviewUnitView cylinderPreviewUnitView,
+            [Inject(Id = UnitType.Sphere)] PreviewUnitView spherePreviewUnitView,
             IPreviewUnitPoolModel previewUnitPoolModel, IDisposer disposer)
         {
             _cubePreviewUnitView = cubePreviewUnitView;
@@ -34,17 +34,17 @@ namespace _Scripts.Unit
             _spherePreviewUnitView.gameObject.SetActive(false);
         }
 
-        private void DisplayPreviewUnit(UnitPreviewType type)
+        private void DisplayPreviewUnit(UnitType type)
         {
             switch (type)
             {
-                case UnitPreviewType.Cube:
+                case UnitType.Cube:
                     _cubePreviewUnitView.gameObject.SetActive(true);
                     break;
-                case UnitPreviewType.Cylinder:
+                case UnitType.Cylinder:
                     _cylinderPreviewUnitView.gameObject.SetActive(true);
                     break;
-                case UnitPreviewType.Sphere:
+                case UnitType.Sphere:
                     _spherePreviewUnitView.gameObject.SetActive(true);
                     break;
                 default:

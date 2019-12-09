@@ -11,7 +11,7 @@ namespace _Scripts.Shop
         public class Factory : PlaceholderFactory<IShopUnitModel, IShopUnitView, ShopUnitController>
         { }
 
-        private ShopUnitController(IShopUnitView view, IShopUnitModel model, IShopConfig shopConfig, IDisposer disposer)
+        private ShopUnitController(IShopUnitView view, IShopUnitModel model, IUnitConfig shopConfig, IDisposer disposer)
         {
             view.Preview = shopConfig.GetPreviewTexture(model.Id.Value);
 

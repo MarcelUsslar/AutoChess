@@ -16,7 +16,6 @@ namespace _Scripts.Installers
         [SerializeField] private BoardView _boardView;
         [SerializeField] private FieldView _fieldView;
         [SerializeField] private HudView _hudView;
-        [SerializeField] private PreparationUnitView _preparationUnitView;
         [SerializeField] private ShopUnitView _shopUnitView;
         [SerializeField] private ShopPanelView _shopPanelView;
 
@@ -25,20 +24,29 @@ namespace _Scripts.Installers
         [SerializeField] private PreviewUnitView _cylinderPreview;
         [SerializeField] private PreviewUnitView _spherePreview;
 
+        [Header("Preparation Views")]
+        [SerializeField] private PreparationUnitView _cubePreparationView;
+        [SerializeField] private PreparationUnitView _cylinderPreparationView;
+        [SerializeField] private PreparationUnitView _spherePreparationView;
+
         public override void InstallBindings()
         {
             BindSingletonView(_benchView, true);
             BindSingletonView(_boardView, true);
             BindSingletonView(_hudView, true);
             BindViewFactory(_fieldView);
-            BindViewFactory(_preparationUnitView);
             BindViewFactory(_shopUnitView);
             BindSingletonView(_shopPanelView);
 
             // preview views
-            BindSingletonView(_cubePreview, UnitPreviewType.Cube);
-            BindSingletonView(_cylinderPreview, UnitPreviewType.Cylinder);
-            BindSingletonView(_spherePreview, UnitPreviewType.Sphere);
+            BindSingletonView(_cubePreview, UnitType.Cube);
+            BindSingletonView(_cylinderPreview, UnitType.Cylinder);
+            BindSingletonView(_spherePreview, UnitType.Sphere);
+
+            // regular views
+            BindViewFactory(_cubePreparationView, UnitType.Cube);
+            BindViewFactory(_cylinderPreparationView, UnitType.Cylinder);
+            BindViewFactory(_spherePreparationView, UnitType.Sphere);
         }
 
         #region ViewFactories
@@ -56,7 +64,7 @@ namespace _Scripts.Installers
         
         private void BindViewFactory<TView>(TView view, object id) where TView : MonoBehaviour
         {
-            Container.Bind<IViewFactory<TView>>().WithId(id).To<ViewFactory<TView>>().AsSingle()
+            Container.Bind<IViewFactory<TView>>().WithId(id).To<ViewFactory<TView>>().AsTransient()
                 .WithConcreteId(id).WithArguments(view);
         }
         

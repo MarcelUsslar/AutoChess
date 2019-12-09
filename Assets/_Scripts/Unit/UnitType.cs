@@ -1,6 +1,6 @@
 ﻿namespace _Scripts.Unit
 {
-    public enum UnitPreviewType
+    public enum UnitType
     {
         Cube,
         Cylinder,

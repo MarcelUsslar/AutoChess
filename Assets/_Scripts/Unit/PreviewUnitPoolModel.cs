@@ -8,37 +8,37 @@ namespace _Scripts.Unit
     public class PreviewUnitPoolModel : IPreviewUnitPoolModel
     {
         private readonly IDisposer _disposer;
-        private readonly IReactiveCollection<UnitPreviewType> _displayedUnitPreviewTypes;
+        private readonly IReactiveCollection<UnitType> _displayedUnitPreviewTypes;
 
-        public IReactiveCollection<UnitPreviewType> DisplayedUnitPreviewTypes
+        public IReactiveCollection<UnitType> DisplayedUnitPreviewTypes
         {
             get { return _displayedUnitPreviewTypes; }
         }
 
-        private readonly Dictionary<UnitPreviewType, ReactiveProperty<int>> _unitPreviewRequests;
+        private readonly Dictionary<UnitType, ReactiveProperty<int>> _unitPreviewRequests;
 
         public PreviewUnitPoolModel(IDisposer disposer)
         {
             _disposer = disposer;
-            _displayedUnitPreviewTypes = new ReactiveCollection<UnitPreviewType>();
+            _displayedUnitPreviewTypes = new ReactiveCollection<UnitType>();
 
-            _unitPreviewRequests = EnumHelper<UnitPreviewType>.Iterator
+            _unitPreviewRequests = EnumHelper<UnitType>.Iterator
                 .ToDictionary(type => type, _ => new ReactiveProperty<int>(0));
 
-            EnumHelper<UnitPreviewType>.Iterator.ForEach(SetupDisplayCondition);
+            EnumHelper<UnitType>.Iterator.ForEach(SetupDisplayCondition);
         }
 
-        public void DisplayPreview(UnitPreviewType type)
+        public void DisplayPreview(UnitType type)
         {
             _unitPreviewRequests[type].Value++;
         }
 
-        public void DisablePreview(UnitPreviewType type)
+        public void DisablePreview(UnitType type)
         {
             _unitPreviewRequests[type].Value--;
         }
 
-        private void SetupDisplayCondition(UnitPreviewType type)
+        private void SetupDisplayCondition(UnitType type)
         {
             var previewRequests = _unitPreviewRequests[type];
 

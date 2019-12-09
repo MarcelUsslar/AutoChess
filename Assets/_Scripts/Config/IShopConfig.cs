@@ -9,7 +9,5 @@ namespace _Scripts.Config
         int ShopEntryAmount { get; }
         IDictionary<int, int> AllShopUnits { get; }
         int GetCost(int id);
-        UnitPreviewType GetPreviewType(int id);
-        RenderTexture GetPreviewTexture(int id);
     }
 }

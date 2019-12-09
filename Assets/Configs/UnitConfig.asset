@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12d5e75dce54b909fb8899bf766b537, type: 3}
+  m_Name: UnitConfig
+  m_EditorClassIdentifier: 
+  _unitMappings:
+  - UnitId: 1
+    UnitType: 0
+    PreviewTexture: {fileID: 8400000, guid: 5f69ebe1bda5efe44a810bfea57d851a, type: 2}
+  - UnitId: 2
+    UnitType: 1
+    PreviewTexture: {fileID: 8400000, guid: 8ca6ebc9b17e21e42885d0c0f5e83e62, type: 2}
+  - UnitId: 3
+    UnitType: 2
+    PreviewTexture: {fileID: 8400000, guid: b0e0f83da79a24744b46340acce5a555, type: 2}

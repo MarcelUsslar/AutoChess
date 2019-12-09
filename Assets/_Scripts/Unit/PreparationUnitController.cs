@@ -25,8 +25,7 @@ namespace _Scripts.Unit
             _benchService = benchService;
 
             model.Position
-                .CombineLatest(model.IsOnBoard, (position, onBoard) => new {position, onBoard})
-                .Subscribe(tuple => SetPosition(tuple.position, tuple.onBoard))
+                .Subscribe(position => SetPosition(position, model.IsOnBoard))
                 .AddToDisposer(disposer);
         }
 

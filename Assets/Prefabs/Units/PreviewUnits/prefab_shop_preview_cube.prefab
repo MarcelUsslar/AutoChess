@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 23155433836253954}
   - component: {fileID: 114349722754450926}
   m_Layer: 8
-  m_Name: prefab_preview_cube
+  m_Name: prefab_shop_preview_cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

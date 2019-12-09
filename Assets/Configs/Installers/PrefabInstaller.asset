@@ -18,15 +18,19 @@ MonoBehaviour:
   _fieldView: {fileID: 114662752277366788, guid: 697b49ef812a9234cacf8f5ed0620d7d,
     type: 2}
   _hudView: {fileID: 114824465891297736, guid: 500bcfe9a0fbd884198816214529a662, type: 2}
-  _preparationUnitView: {fileID: 114878218873688340, guid: 9395790ab5a0dcb4f90a4446798f3daf,
-    type: 2}
   _shopUnitView: {fileID: 114861231596588222, guid: 9b8622c7e77dd9f48b0340f4858fd1f1,
     type: 2}
   _shopPanelView: {fileID: 114171029624803818, guid: fb2e80435540f3b46b7acbcb82cb6453,
     type: 2}
   _cubePreview: {fileID: 114349722754450926, guid: 3b7bc968f7f0a23429f5b908c6c9bc34,
     type: 2}
-  _cylinderPreview: {fileID: 114976761125772778, guid: 26dd314f46a647c4b9e9ecc49bcdb55d,
+  _cylinderPreview: {fileID: 114976761125772778, guid: b6fe8c0175d780742a4f8f9ab93d3353,
     type: 2}
-  _spherePreview: {fileID: 114066719033352348, guid: b772f5af8b7af214a9331d0c4d7425e0,
+  _spherePreview: {fileID: 114066719033352348, guid: 62769f761b8c10541b5844c5c1495f32,
+    type: 2}
+  _cubePreparationView: {fileID: 114878218873688340, guid: 9395790ab5a0dcb4f90a4446798f3daf,
+    type: 2}
+  _cylinderPreparationView: {fileID: 114878218873688340, guid: 5c3445f1f93576244a4b8b5a588db5ca,
+    type: 2}
+  _spherePreparationView: {fileID: 114878218873688340, guid: 3cc46f1e8cfdac7448e1aeded273e522,
     type: 2}
